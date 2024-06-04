@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { User } from '../../models/user.class';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { User } from '../../models/user.class';
     MatInputModule,
     MatDatepickerModule,
     FormsModule,
+    MatProgressBarModule,
   ],
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss'
@@ -25,6 +27,7 @@ import { User } from '../../models/user.class';
 export class DialogAddUserComponent {
   user = new User();
   birthDate?: Date;
+  loading = false;
 
   saveUser() {
     if (this.birthDate) {
