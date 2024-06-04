@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -33,7 +33,7 @@ export class DialogAddUserComponent {
   birthDate?: Date;
   loading = false;
 
-  constructor(private firestore: Firestore) { }
+  constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>, private firestore: Firestore) { }
 
   async saveUser() {
     if (this.birthDate) {
@@ -50,6 +50,7 @@ export class DialogAddUserComponent {
       const result = await addDoc(userCollection, this.user.toJSON());
       this.loading = false;
       console.log('Adding user finished ', result);
+      this.dialogRef.close();
     } catch (error) {
       console.error('Error adding user: ', error);
     }

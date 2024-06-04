@@ -5,13 +5,11 @@
                 <tr>
                     <th>Name</th>
                     <th>E-Mail</th>
-                    <th>Birthday</th>
                     <th>City</th>
                 </tr>
                 <tr *ngFor="let user of allUsers">
                     <td>{{user['lastName']}} {{user['firstName']}}</td>
                     <td>{{user['email']}}</td>
-                    <td>{{user['birthday']}}</td>
                     <td>{{user['city']}}</td>
                 </tr>
             </tbody>
