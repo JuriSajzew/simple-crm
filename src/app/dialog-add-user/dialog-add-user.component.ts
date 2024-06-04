@@ -8,6 +8,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { User } from '../../models/user.class';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -22,6 +23,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatDatepickerModule,
     FormsModule,
     MatProgressBarModule,
+    CommonModule,
   ],
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss'
@@ -37,6 +39,7 @@ export class DialogAddUserComponent {
     if (this.birthDate) {
       this.user.birthDate = this.birthDate.getTime();
       console.log(this.user);
+      this.loading = true;
     } else {
       alert('Bitte fülle das Fehld Geburtstag aus!')
       return;
@@ -45,6 +48,7 @@ export class DialogAddUserComponent {
     try {
       const userCollection = collection(this.firestore, 'users');
       const result = await addDoc(userCollection, this.user.toJSON());
+      this.loading = false;
       console.log('Adding user finished ', result);
     } catch (error) {
       console.error('Error adding user: ', error);
